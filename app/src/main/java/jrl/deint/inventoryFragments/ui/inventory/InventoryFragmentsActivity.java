@@ -11,7 +11,7 @@ import android.widget.TextView;
 import jrl.deint.inventoryFragments.R;
 import jrl.deint.inventoryFragments.ui.dashboard.DashboardActivity;
 
-public class InventoryMVPActivity extends AppCompatActivity {
+public class InventoryFragmentsActivity extends AppCompatActivity {
 
     private TextView txvSignUp;
     private Button btnSignIn;
@@ -28,7 +28,7 @@ public class InventoryMVPActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(InventoryMVPActivity.this, DashboardActivity.class);
+                intent = new Intent(InventoryFragmentsActivity.this, DashboardActivity.class);
                 startActivity(intent);
             }
         });

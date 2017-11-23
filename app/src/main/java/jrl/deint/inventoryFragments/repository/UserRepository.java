@@ -62,12 +62,9 @@ public class UserRepository {
     public boolean isUserExists(User user) {
         return true;
     }
-<<<<<<< HEAD
 
     public boolean validateCredentials(String name, String password) {
         User user = new User(0, name, password, null, null, false, false);
         return users.get(users.indexOf(user)).getPassword().equals(password);
     }
-=======
->>>>>>> e00dc83e1d0120b896c439e4532e9afdaeef6006
 }

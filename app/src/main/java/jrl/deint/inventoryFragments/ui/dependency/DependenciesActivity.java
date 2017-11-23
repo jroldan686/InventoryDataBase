@@ -5,18 +5,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-
 import jrl.deint.inventoryFragments.R;
 import jrl.deint.inventoryFragments.base.BaseActivity;
 import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditPresenter;
-import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditPresenterImpl;
 import jrl.deint.inventoryFragments.ui.dependency.presenter.ListPresenter;
-import jrl.deint.inventoryFragments.ui.dependency.presenter.ListPresenterImpl;
 
 public class DependenciesActivity extends BaseActivity implements ListDependency.ListDependencyListener {
 
     private ListDependency listDependency;
-    private ListPresenterImpl listPresenter;
+    private ListPresenter listPresenter;
 
     private AddEditDependency addEditDependency;
     private AddEditPresenter addEditPresenter;
@@ -36,7 +33,7 @@ public class DependenciesActivity extends BaseActivity implements ListDependency
             fragmentTransaction.commit();
         }
         // 2. Se crea el presentador, y se le pasa en el constructor la vista correspondiente
-        listPresenter = new ListPresenterImpl(listDependency);
+        listPresenter = new ListPresenter(listDependency);
 
         // 3. Si fuera necesario, se asigna el presentador a su fragment
         listDependency.setPresenter(listPresenter);
@@ -55,9 +52,9 @@ public class DependenciesActivity extends BaseActivity implements ListDependency
             fragmentTransaction.commit();
         }
         // 2. Se crea el presentador, y se le pasa en el constructor la vista correspondiente
-        addEditPresenter = new AddEditPresenterImpl(addEditDependency);
+        addEditPresenter = new AddEditPresenter(addEditDependency);
 
         // 3. Si fuera necesario, se asignan el presentador a su fragment
-        addEditDependency.setPresenter(addEditDependency);
+        addEditDependency.setPresenter(addEditPresenter);
     }
 }

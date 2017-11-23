@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="jrl.deint.inventoryFragments.ui.inventory.InventoryMVPActivity"
+            android:name="jrl.deint.inventoryFragments.ui.inventory.InventoryFragmentsActivity"
             android:theme="@style/LoginTheme" />
         <activity android:name="jrl.deint.inventoryFragments.ui.dashboard.DashboardActivity" />
         <activity android:name="jrl.deint.inventoryFragments.ui.product.ProductActivity" />

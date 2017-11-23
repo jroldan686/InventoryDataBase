@@ -5,6 +5,7 @@ package jrl.deint.inventoryFragments.ui.dependency.contract;
  */
 
 public interface AddEditDependencyContract {
+
     interface View {
         void setPresenter(AddEditDependencyContract.Presenter presenter);
     }

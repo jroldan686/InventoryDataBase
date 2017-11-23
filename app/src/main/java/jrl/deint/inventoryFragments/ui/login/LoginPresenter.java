@@ -7,4 +7,6 @@ package jrl.deint.inventoryFragments.ui.login;
 public interface LoginPresenter {
 
     void validateCredentials(String user, String password);
+
+    void onDestroy();
 }

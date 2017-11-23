@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import jrl.deint.inventoryFragments.ui.inventory.InventoryMVPActivity;
+import jrl.deint.inventoryFragments.ui.inventory.InventoryFragmentsActivity;
 import jrl.deint.inventoryFragments.ui.preferences.PreferencesActivity;
 import jrl.deint.inventoryFragments.ui.product.ProductActivity;
 import jrl.deint.inventoryFragments.R;
@@ -81,7 +81,7 @@ public class DashboardActivity extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()) {
                 case R.drawable.inventory2:
-                    intent = new Intent(DashboardActivity.this, InventoryMVPActivity.class);
+                    intent = new Intent(DashboardActivity.this, InventoryFragmentsActivity.class);
                     break;
                 case R.drawable.products:
                     intent = new Intent(DashboardActivity.this, ProductActivity.class);

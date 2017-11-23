@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import jrl.deint.inventoryFragments.ui.inventory.InventoryMVPActivity;
+import jrl.deint.inventoryFragments.ui.inventory.InventoryFragmentsActivity;
 import jrl.deint.inventoryFragments.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent();
-                intent.setClass(SplashActivity.this, InventoryMVPActivity.class);
+                intent.setClass(SplashActivity.this, InventoryFragmentsActivity.class);
                 startActivity(intent);
             }
         });

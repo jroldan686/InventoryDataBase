@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -22,6 +23,8 @@ public class SectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_section);
         rcvSections = (RecyclerView) findViewById(R.id.rcvSections);
         rcvSections.setHasFixedSize(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if(savedInstanceState != null)
             sectionAdapter = new SectionAdapter(savedInstanceState.<Section>getParcelableArrayList("section"));
@@ -40,6 +43,7 @@ public class SectionActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_activity_section, menu);
+        // Hay casos en los que devuelve true directamente porque es igual
         return super.onCreateOptionsMenu(menu);
     }
 

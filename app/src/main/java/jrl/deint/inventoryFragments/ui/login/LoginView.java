@@ -12,7 +12,5 @@ public interface LoginView {
 
     void setPasswordEmptyError();
 
-    void serPasswordError();
-
-
+    void setPasswordError();
 }
