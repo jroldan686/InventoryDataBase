@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:columnCount="3"
     app:orientation="horizontal"
-    tools:context="jrl.deint.inventoryMVP.ui.dashboard.DashboardActivity"
+    tools:context="jrl.deint.inventoryFragments.ui.dashboard.DashboardActivity"
     android:id="@+id/gridDashboard">
 
     <!-- Fila 1 -->

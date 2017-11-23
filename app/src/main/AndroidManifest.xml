@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="jrl.deint.inventoryMVP">
+    package="jrl.deint.inventoryFragments">
 
     <application
-        android:name="jrl.deint.inventoryMVP.ui.inventory.InventoryApplication"
+        android:name="jrl.deint.inventoryFragments.ui.inventory.InventoryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_inventory"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_inventory"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="jrl.deint.inventoryMVP.ui.splash.SplashActivity">
+        <activity android:name="jrl.deint.inventoryFragments.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,16 +18,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="jrl.deint.inventoryMVP.ui.inventory.InventoryMVPActivity"
+            android:name="jrl.deint.inventoryFragments.ui.inventory.InventoryMVPActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.dashboard.DashboardActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.product.ProductActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.dependency.DependenciesActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.section.SectionActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.settings.GeneralSettingActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.settings.AccountSettingActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.about.AboutActivity" />
-        <activity android:name="jrl.deint.inventoryMVP.ui.dependency.AddDependencyActivity"></activity>
+        <activity android:name="jrl.deint.inventoryFragments.ui.dashboard.DashboardActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.product.ProductActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.dependency.DependenciesActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.section.SectionActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.settings.GeneralSettingActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.settings.AccountSettingActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.about.AboutActivity" />
+        <activity android:name="jrl.deint.inventoryFragments.ui.dependency.AddDependencyActivity"></activity>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        tools:context="jrl.deint.inventoryMVP.ui.product.ProductActivity">
+        tools:context="jrl.deint.inventoryFragments.ui.product.ProductActivity">
 
         <ImageView
             android:id="@+id/imgvProduct"
