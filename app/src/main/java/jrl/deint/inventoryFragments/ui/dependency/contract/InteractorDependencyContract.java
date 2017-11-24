@@ -4,16 +4,20 @@ import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
 
 /**
- * Created by jesus on 23/11/17.
+ * Created by usuario on 24/11/17.
  */
 
-public interface DetailDependencyContract {
+public interface InteractorDependencyContract {
 
-    interface View extends BaseView {
+    interface AddEditInteractor {
 
     }
 
-    interface Presenter extends BasePresenter {
+    interface DetailInteractor {
+
+    }
+
+    interface ListInteractor {
 
     }
 }

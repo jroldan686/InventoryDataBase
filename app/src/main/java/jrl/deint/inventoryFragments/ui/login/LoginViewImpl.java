@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import jrl.deint.inventoryFragments.R;
-import jrl.deint.inventoryFragments.base.BaseActivity;
+import jrl.deint.inventoryFragments.ui.base.BaseActivity;
 import jrl.deint.inventoryFragments.ui.dashboard.DashboardActivity;
 
 /**

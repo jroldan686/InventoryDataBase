@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import jrl.deint.inventoryFragments.R;
-import jrl.deint.inventoryFragments.base.BaseActivity;
+import jrl.deint.inventoryFragments.ui.base.BaseActivity;
 import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditPresenter;
 import jrl.deint.inventoryFragments.ui.dependency.presenter.ListPresenter;
 
