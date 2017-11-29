@@ -1,5 +1,7 @@
 package jrl.deint.inventoryFragments.ui.dependency.contract;
 
+import java.util.List;
+
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
 
@@ -10,10 +12,10 @@ import jrl.deint.inventoryFragments.ui.base.BaseView;
 public interface ListDependencyContract {
 
     interface View extends BaseView {
-
+        void showDependency(List listDependencyInteractor);
     }
 
     interface Presenter extends BasePresenter {
-
+        void loadDependencies();
     }
 }

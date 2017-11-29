@@ -30,8 +30,9 @@ public class DependencyAdapter extends ArrayAdapter<Dependency> {
      * @param context
      */
     public DependencyAdapter(@NonNull Context context) {
-        super(context, R.layout.item_dependency, new ArrayList<>(DependencyRepository.getInstance().getDependencies()));
+        //super(context, R.layout.item_dependency, new ArrayList<>(DependencyRepository.getInstance().getDependencies()));
         //sort(new Dependency.DependencyOrderByShortName());
+        super(context, R.layout.item_dependency, new ArrayList<Dependency>());
     }
 
     @NonNull
@@ -84,4 +85,6 @@ public class DependencyAdapter extends ArrayAdapter<Dependency> {
         TextView txvName;
         TextView txvShortName;
     }
+
+
 }

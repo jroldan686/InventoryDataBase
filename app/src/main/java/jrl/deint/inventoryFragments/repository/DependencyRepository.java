@@ -62,4 +62,8 @@ public class DependencyRepository {
         Collections.sort(dependencies, new Dependency.DependencyOrderByShortName());
         return dependencies;
     }
+
+    public boolean validateDependency(String name, String sortname) {
+        return true;
+    }
 }

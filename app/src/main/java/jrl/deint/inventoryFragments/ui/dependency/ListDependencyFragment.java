@@ -9,22 +9,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import jrl.deint.inventoryFragments.R;
 import jrl.deint.inventoryFragments.adapter.DependencyAdapter;
+import jrl.deint.inventoryFragments.ui.base.BasePresenter;
+import jrl.deint.inventoryFragments.ui.base.BaseView;
 import jrl.deint.inventoryFragments.ui.dependency.contract.ListDependencyContract;
 
 /**
  * Created by usuario on 23/11/17.
  */
 
-public class ListDependency extends ListFragment implements ListDependencyContract.View {
+public class ListDependencyFragment extends ListFragment implements BaseView, ListDependencyContract.View {
 
     public static final String TAG = "listdependency";
     private ListDependencyListener callback;
     private ListDependencyContract.Presenter presenter;
+    private DependencyAdapter adapter;
 
     interface ListDependencyListener {
         void addNewDependency();
+    }
+
+    public ListDependencyFragment() {
+        setRetainInstance(true);
     }
 
     @Override
@@ -37,8 +46,8 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         }
     }
 
-    public static ListDependency newInstance(Bundle arguments) {
-        ListDependency listDependency = new ListDependency();
+    public static ListDependencyFragment newInstance(Bundle arguments) {
+        ListDependencyFragment listDependency = new ListDependencyFragment();
         if(arguments != null) {
             listDependency.setArguments(arguments);
         }
@@ -59,17 +68,27 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 callback.addNewDependency();
             }
         });
+        presenter.loadDependencies();
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setListAdapter(new DependencyAdapter(getActivity()));
+        //setListAdapter(new DependencyAdapter(getActivity()));
+        setListAdapter(adapter);
+
     }
 
     @Override
-    public void setPresenter(ListDependencyContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(BasePresenter presenter) {
+        this.presenter = (ListDependencyContract.Presenter)presenter;
+    }
+
+    @Override
+    public void showDependency(List listDependencyInteractor) {
+        // Se limpio el adaptador por si hubieran datos anteriores
+        adapter.clear();
+        adapter.addAll(listDependencyInteractor);
     }
 }

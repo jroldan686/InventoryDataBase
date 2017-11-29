@@ -14,13 +14,13 @@ import jrl.deint.inventoryFragments.ui.dependency.contract.DetailDependencyContr
  * Created by usuario on 23/11/17.
  */
 
-public class DetailDependency extends Fragment implements DetailDependencyContract.View {
+public class DetailDependencyFragment extends Fragment implements DetailDependencyContract.View {
 
     public static final String TAG = "detaildependency";
     private DetailDependencyContract.Presenter presenter;
 
-    public static DetailDependency newInstance(Bundle arguments) {
-        DetailDependency detailDependency = new DetailDependency();
+    public static DetailDependencyFragment newInstance(Bundle arguments) {
+        DetailDependencyFragment detailDependency = new DetailDependencyFragment();
         if(arguments != null) {
             detailDependency.setArguments(arguments);
         }

@@ -7,4 +7,7 @@
     <string name="errorDependencyDuplicate">Dependencia duplicada</string>
     <string name="errorShortname">Debe introducir un nombre corto</string>
     <string name="errorDescriptionEmpty">Debe introducir una descripción</string>
+    <string name="errorPassword">Contraseña incorrecta</string>
+    <string name="errorEmailFormat">Formato de correo electrónico no válido</string>
+    <string name="errorName">Nombre no válido</string>
 </resources>

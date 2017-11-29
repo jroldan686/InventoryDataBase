@@ -11,14 +11,15 @@ public interface AddEditDependencyContract {
 
     interface View extends BaseView {
         void showListDependency();
-        void showDescriptionError();
-        void showNameError();
-        void showDependencyExistsError();
+        void showDescriptionEmptyError();
+        void showNameEmptyError();
+        void showShortNameEmptyError();
+        void showShortNameLengthError();
         void showDependencyDuplicate();
+        void onSuccess();
     }
 
     interface Presenter extends BasePresenter {
-
-        void validatedependency(String name, String shortname, String description);
+        void saveDependency(String name, String shortName, String description);
     }
 }
