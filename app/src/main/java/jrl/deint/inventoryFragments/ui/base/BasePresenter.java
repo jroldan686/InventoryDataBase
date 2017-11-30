@@ -7,4 +7,5 @@ package jrl.deint.inventoryFragments.ui.base;
 public interface BasePresenter {
 
     void validatedependency();
+    void onDestroy();
 }

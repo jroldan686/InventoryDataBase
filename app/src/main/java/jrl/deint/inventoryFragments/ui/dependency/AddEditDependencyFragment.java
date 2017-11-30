@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import jrl.deint.inventoryFragments.R;
+import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.dependency.contract.AddEditDependencyContract;
+import jrl.deint.inventoryFragments.utils.AddEdit;
 
 /**
  * Created by usuario on 23/11/17.
@@ -34,6 +36,7 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
     private EditText edtDescription;
     private FloatingActionButton fab;
     private AddEditDependencyListener mCallback;
+    private AddEdit addEditMode;
 
     public interface AddEditDependencyListener {
         void listDependency();
@@ -122,9 +125,10 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
             }
         });
 
-
-        if(getArguments() != null) {
-        }
+        //Por defecto está en ADD_MODE
+        addEditMode = new AddEdit();
+        if(getArguments() != null)
+            addEditMode.setMode(AddEdit.EDIT_MODE);
 
         Log.d(TAG, "onCreateView");
         return rootView;
@@ -151,17 +155,23 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveDependency(
-                        tilName.getEditText().getText().toString(),
-                        tilShortName.getEditText().getText().toString(),
-                        tilDescription.getEditText().getText().toString());
+                if(addEditMode.getMode() == AddEdit.ADD_MODE) {
+                    presenter.saveDependency(
+                            tilName.getEditText().getText().toString(),
+                            tilShortName.getEditText().getText().toString(),
+                            tilDescription.getEditText().getText().toString());
+                }
+                if(addEditMode.getMode() == AddEdit.EDIT_MODE) {
+                    Dependency dependency = getArguments().getParcelable(Dependency.TAG);
+                    presenter.editDependency(dependency, tilDescription.getEditText().getText().toString());
+                }
             }
         });
     }
 
     @Override
     public void setPresenter(BasePresenter presenter) {
-        this.presenter = (AddEditDependencyContract.Presenter) presenter;
+        this.presenter = (AddEditDependencyContract.Presenter)presenter
     }
 
     // Si es correcto se muestra el listado con la dependencia que se ha añadido

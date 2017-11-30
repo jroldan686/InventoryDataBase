@@ -35,4 +35,10 @@ public class ListDependencyPresenter implements ListDependencyContract.Presenter
     public void validatedependency() {
 
     }
+
+    @Override
+    public void onDestroy() {
+        view = null;
+        interactor = null;
+    }
 }

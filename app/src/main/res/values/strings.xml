@@ -31,4 +31,8 @@
     <string name="tietName">Nombre</string>
     <string name="tietShortName">Nombre corto</string>
     <string name="tietDescription">Descripción</string>
+    <string name="fragment_listdependency_delete">Eliminar</string>
+    <string name="listDependencyFragmentContextTitle">"Opciones Lista Dependencia"</string>
+    <string name="btnOk">Aceptar</string>
+    <string name="btnCancel">Cancelar</string>
 </resources>
