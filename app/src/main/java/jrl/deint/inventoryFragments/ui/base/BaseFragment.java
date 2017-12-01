@@ -1,5 +1,8 @@
 package jrl.deint.inventoryFragments.ui.base;
 
+import android.app.Application;
+import android.widget.Toast;
+
 /**
  * Created by usuario on 24/11/17.
  */

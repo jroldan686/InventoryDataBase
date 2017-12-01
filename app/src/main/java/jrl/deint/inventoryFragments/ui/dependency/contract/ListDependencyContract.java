@@ -2,6 +2,7 @@ package jrl.deint.inventoryFragments.ui.dependency.contract;
 
 import java.util.List;
 
+import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
 
@@ -17,5 +18,6 @@ public interface ListDependencyContract {
 
     interface Presenter extends BasePresenter {
         void loadDependencies();
+        void deleteItem(Dependency parcelable);
     }
 }

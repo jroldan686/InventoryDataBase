@@ -25,8 +25,17 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
     }
 
     @Override
-    public void addDependency(String name, String sortname, String description) {
-        Dependency dependency = new Dependency(20, name, sortname, description);
+    public void addDependency(String name, String shortname, String description) {
+        Dependency dependency = new Dependency(-1, name, shortname, description);
         DependencyRepository.getInstance().addDependency(dependency);
+    }
+
+    @Override
+    public void editDependency(Dependency dependency, String description, OnAddEditFinishedListener listener) {
+        if(!description.isEmpty()) {
+            DependencyRepository.getInstance().editDependency(dependency, description);
+            listener.onSuccess(dependency.getName(), dependency.getShortname(), dependency.getDescription());
+        } else
+            listener.onDescriptionEmptyError();
     }
 }

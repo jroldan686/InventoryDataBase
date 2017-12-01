@@ -3,6 +3,7 @@ package jrl.deint.inventoryFragments.ui.dependency;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
@@ -33,14 +34,22 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
     private ListDependencyListener callback;
     private ListDependencyContract.Presenter presenter;
     private DependencyAdapter adapter;
+    FloatingActionButton fab;
 
     interface ListDependencyListener {
-        void addNewDependency();
-        void addEditDependency(Bundle bundle);
+        void addNewDependency(Bundle bundle);
     }
 
     public ListDependencyFragment() {
         setRetainInstance(true);
+    }
+
+    public static ListDependencyFragment newInstance(Bundle arguments) {
+        ListDependencyFragment listDependencyFragment = new ListDependencyFragment();
+        if(arguments != null) {
+            listDependencyFragment.setArguments(arguments);
+        }
+        return listDependencyFragment;
     }
 
     @Override
@@ -89,28 +98,14 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
         }
     }
 
-    public static ListDependencyFragment newInstance(Bundle arguments) {
-        ListDependencyFragment listDependency = new ListDependencyFragment();
-        if(arguments != null) {
-            listDependency.setArguments(arguments);
-        }
-        return listDependency;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_list_dependency, container, false);
         // Como se encuentra en el fragment, se usa rootView
-        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
         // Si el floatingactionbutton se encontrara en el xml de la Activity
         //FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.addNewDependency();
-            }
-        });
         presenter.loadDependencies();
         return rootView;
     }
@@ -120,17 +115,30 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
         super.onViewCreated(view, savedInstanceState);
         //setListAdapter(new DependencyAdapter(getActivity()));
         setListAdapter(adapter);
+
         // AdapterView es la lista
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Parcelable parcel = (Parcelable) adapterView.getItemAtPosition(position);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(Dependency.TAG, (Dependency)adapterView.getItemAtPosition(position));
-                callback.addEditDependency(bundle);
+                bundle.putParcelable(Dependency.TAG, parcel);
+                callback.addNewDependency(bundle);
+                return false;
             }
         });
+
         // El menú contextual tiene que registrarse cuando la vista ya ha sido creada
         registerForContextMenu(getListView());      // Registramos el menú contextual
+
+        // Si el fab se encontrara en el xml de la Activity
+        // FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.addNewDependency(null);
+            }
+        });
     }
 
     @Override
@@ -143,5 +151,23 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
         // Se limpio el adaptador por si hubieran datos anteriores
         adapter.clear();
         adapter.addAll(listDependencyInteractor);
+    }
+
+    /**
+     * Se llama cuando se elimina la unión Activity-Fragmnent cuando la Activity se elimine
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
+    }
+    /**
+     * Se llama cuando se destruya la Activity
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter = null;
+        adapter = null;
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import jrl.deint.inventoryFragments.R;
+import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.dependency.contract.DetailDependencyContract;
 
 /**
@@ -38,7 +39,7 @@ public class DetailDependencyFragment extends Fragment implements DetailDependen
     }
 
     @Override
-    public void setPresenter(DetailDependencyContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(BasePresenter presenter) {
+        this.presenter = (DetailDependencyContract.Presenter)presenter;
     }
 }

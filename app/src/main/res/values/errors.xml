@@ -10,4 +10,5 @@
     <string name="errorPassword">Contraseña incorrecta</string>
     <string name="errorEmailFormat">Formato de correo electrónico no válido</string>
     <string name="errorName">Nombre no válido</string>
+    <string name="errorShortnameLength">Error: Tamaño no válido</string>
 </resources>

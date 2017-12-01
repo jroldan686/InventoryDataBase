@@ -89,7 +89,7 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
             }
         });
 
-        edtShortName = (EditText)rootView.findViewById(R.id.edtShortName);
+        edtShortName = (EditText)rootView.findViewById(R.id.tietShortName);
         edtShortName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -171,7 +171,7 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
 
     @Override
     public void setPresenter(BasePresenter presenter) {
-        this.presenter = (AddEditDependencyContract.Presenter)presenter
+        this.presenter = (AddEditDependencyContract.Presenter)presenter;
     }
 
     // Si es correcto se muestra el listado con la dependencia que se ha añadido
@@ -202,6 +202,6 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
 
     @Override
     public void showDependencyDuplicate() {
-        showMessage(getResources().getString(R.string.errorDependencyDuplicate));
+        //showMessage(getResources().getString(R.string.errorDependencyDuplicate));
     }
 }

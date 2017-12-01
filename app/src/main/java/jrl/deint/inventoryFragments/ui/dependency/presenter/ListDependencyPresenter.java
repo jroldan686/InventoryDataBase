@@ -37,6 +37,11 @@ public class ListDependencyPresenter implements ListDependencyContract.Presenter
     }
 
     @Override
+    public void deleteItem(Dependency parcelable) {
+
+    }
+
+    @Override
     public void onDestroy() {
         view = null;
         interactor = null;
