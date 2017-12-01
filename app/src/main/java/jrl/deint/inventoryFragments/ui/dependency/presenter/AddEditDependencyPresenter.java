@@ -1,5 +1,7 @@
 package jrl.deint.inventoryFragments.ui.dependency.presenter;
 
+import java.io.Serializable;
+
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.dependency.contract.AddEditDependencyContract;
 import jrl.deint.inventoryFragments.ui.dependency.interactor.AddEditDependencyInteractor;
@@ -10,8 +12,9 @@ import jrl.deint.inventoryFragments.ui.dependency.interactor.AddEditDependencyIn
  */
 
 public class AddEditDependencyPresenter implements AddEditDependencyContract.Presenter,
-        AddEditDependencyInteractor.OnAddEditFinishedListener {
+        AddEditDependencyInteractor.OnAddEditFinishedListener, Serializable {
 
+    public static final String TAG = "addeditdependencypresenter";
     private AddEditDependencyContract.View view;
     private AddEditDependencyInteractorImpl interactor;
 

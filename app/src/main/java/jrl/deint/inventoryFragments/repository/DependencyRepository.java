@@ -2,6 +2,7 @@ package jrl.deint.inventoryFragments.repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 
@@ -89,7 +90,32 @@ public class DependencyRepository {
         return found;
     }
 
-    public boolean deleteDependency(Dependency dependency) {
-        return dependencies.remove(dependency);
+    /**
+     * Método que salva una dependencia en el repositorio/BD
+     * @param d es el objeto Dependency
+     */
+    public void saveDependency(Dependency d) {
+        // Esta es la sintaxis de un foreach en Android
+        for(Dependency dependency:dependencies) {
+            if(dependency.get_ID() == d.get_ID())
+                dependency.setDescription(d.getDescription());
+        }
+    }
+
+    public void deleteDependency(Dependency d) {
+        //return dependencies.remove(dependency);
+
+        // No se puede eliminar el objeto directamente por lo que para eliminar
+        // de la colección NO SE PUEDE USAR FOREACH PORQUE LA RECORRE EN MODO LECTURA
+
+        // Foreach usa Iterator por lo que se crea uno propio
+        // De esta forma se recupera el puntero Iterator de la colección
+        Iterator<Dependency> iterator = dependencies.iterator();
+        Dependency dependency;
+        while (iterator.hasNext()) {
+            dependency = iterator.next();
+            if(dependency.get_ID() == d.get_ID())
+                iterator.remove();
+        }
     }
 }

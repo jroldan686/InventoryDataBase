@@ -1,5 +1,6 @@
 package jrl.deint.inventoryFragments.ui.dependency.presenter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
@@ -11,8 +12,9 @@ import jrl.deint.inventoryFragments.ui.dependency.interactor.ListDependencyInter
  * Created by usuario on 23/11/17.
  */
 
-public class ListDependencyPresenter implements ListDependencyContract.Presenter, ListDependencyInteractor.OnLoadFinishedListener {
+public class ListDependencyPresenter implements ListDependencyContract.Presenter, ListDependencyInteractor.OnLoadFinishedListener, Serializable {
 
+    public static final String TAG = "listdependencypresenter";
     private ListDependencyContract.View view;
     private ListDependencyInteractorImpl interactor;
 

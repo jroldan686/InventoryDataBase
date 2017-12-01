@@ -26,7 +26,7 @@ import jrl.deint.inventoryFragments.utils.AddEdit;
 
 public class AddEditDependencyFragment extends Fragment implements AddEditDependencyContract.View {
 
-    public static final String TAG = "addeditdependency";
+    public static final String TAG = "addeditdependencyfragment";
     private AddEditDependencyContract.Presenter presenter;
     private TextInputLayout tilName;
     private TextInputLayout tilShortName;

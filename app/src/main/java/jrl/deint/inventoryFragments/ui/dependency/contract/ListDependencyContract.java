@@ -1,5 +1,6 @@
 package jrl.deint.inventoryFragments.ui.dependency.contract;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
@@ -16,7 +17,7 @@ public interface ListDependencyContract {
         void showDependency(List listDependencyInteractor);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter, Serializable {
         void loadDependencies();
         void deleteItem(Dependency parcelable);
     }

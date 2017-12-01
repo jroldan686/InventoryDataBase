@@ -21,7 +21,10 @@ import jrl.deint.inventoryFragments.adapter.DependencyAdapter;
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
+import jrl.deint.inventoryFragments.ui.dependency.contract.AddEditDependencyContract;
 import jrl.deint.inventoryFragments.ui.dependency.contract.ListDependencyContract;
+import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditDependencyPresenter;
+import jrl.deint.inventoryFragments.ui.dependency.presenter.ListDependencyPresenter;
 import jrl.deint.inventoryFragments.utils.CommonDialog;
 
 /**
@@ -30,7 +33,7 @@ import jrl.deint.inventoryFragments.utils.CommonDialog;
 
 public class ListDependencyFragment extends ListFragment implements BaseView, ListDependencyContract.View {
 
-    public static final String TAG = "listdependency";
+    public static final String TAG = "listdependencyfragment";
     private ListDependencyListener callback;
     private ListDependencyContract.Presenter presenter;
     private DependencyAdapter adapter;
@@ -151,6 +154,18 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
         // Se limpio el adaptador por si hubieran datos anteriores
         adapter.clear();
         adapter.addAll(listDependencyInteractor);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ListDependencyPresenter.TAG, presenter);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        presenter = (ListDependencyContract.Presenter) savedInstanceState.getSerializable(ListDependencyPresenter.TAG);
     }
 
     /**
