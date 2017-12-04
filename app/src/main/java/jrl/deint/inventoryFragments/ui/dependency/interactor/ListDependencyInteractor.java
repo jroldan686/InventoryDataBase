@@ -10,6 +10,8 @@ import jrl.deint.inventoryFragments.data.db.model.Dependency;
 
 public interface ListDependencyInteractor {
 
+    void deleteDependency(Dependency dependency);
+
     interface OnLoadFinishedListener {
         void onSuccess(List<Dependency> dependencies);
     }

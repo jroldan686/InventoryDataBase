@@ -1,5 +1,6 @@
 package jrl.deint.inventoryFragments.ui.dependency.interactor;
 
+import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.repository.DependencyRepository;
 
 /**
@@ -12,6 +13,13 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor {
 
     public ListDependencyInteractorImpl(OnLoadFinishedListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void deleteDependency(Dependency dependency) {
+        if(DependencyRepository.getInstance().deleteDependency(dependency))
+            //Falta mostrar mensaje cuando se haya eliminado
+            listener.onSuccess(DependencyRepository.getInstance().getDependencies());
     }
 
     public void loadDependencies(){

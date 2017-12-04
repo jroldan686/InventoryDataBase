@@ -1,5 +1,6 @@
 package jrl.deint.inventoryFragments.ui.dependency;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import jrl.deint.inventoryFragments.R;
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.dependency.contract.AddEditDependencyContract;
+import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditDependencyPresenter;
 import jrl.deint.inventoryFragments.utils.AddEdit;
 
 /**
@@ -61,6 +63,7 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
         }
     }
 
+    @SuppressLint("LongLogTag")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -127,8 +130,15 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
 
         //Por defecto está en ADD_MODE
         addEditMode = new AddEdit();
-        if(getArguments() != null)
+        if(getArguments() != null) {
             addEditMode.setMode(AddEdit.EDIT_MODE);
+            Dependency dependency = getArguments().getParcelable(Dependency.TAG);
+            tilName.getEditText().setText(dependency.getName());
+            tilShortName.getEditText().setText(dependency.getShortname());
+            tilDescription.getEditText().setText(dependency.getDescription());
+            tilName.setEnabled(false);
+            tilShortName.setEnabled(false);
+        }
 
         Log.d(TAG, "onCreateView");
         return rootView;
@@ -170,8 +180,24 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(AddEditDependencyPresenter.TAG, presenter);
+    }
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        this.presenter = (AddEditDependencyContract.Presenter) savedInstanceState.get(AddEditDependencyPresenter.TAG);
+    }
+
+    @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (AddEditDependencyContract.Presenter)presenter;
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 
     // Si es correcto se muestra el listado con la dependencia que se ha añadido
@@ -203,5 +229,16 @@ public class AddEditDependencyFragment extends Fragment implements AddEditDepend
     @Override
     public void showDependencyDuplicate() {
         //showMessage(getResources().getString(R.string.errorDependencyDuplicate));
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 }

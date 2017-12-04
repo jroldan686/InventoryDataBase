@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -21,9 +22,7 @@ import jrl.deint.inventoryFragments.adapter.DependencyAdapter;
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
-import jrl.deint.inventoryFragments.ui.dependency.contract.AddEditDependencyContract;
 import jrl.deint.inventoryFragments.ui.dependency.contract.ListDependencyContract;
-import jrl.deint.inventoryFragments.ui.dependency.presenter.AddEditDependencyPresenter;
 import jrl.deint.inventoryFragments.ui.dependency.presenter.ListDependencyPresenter;
 import jrl.deint.inventoryFragments.utils.CommonDialog;
 
@@ -63,32 +62,37 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
     }
 
     /**
-     * Implementar las diferentes acciones a realizar en las opciones del menú contextual
+     * Implementa las diferentes acciones a realizar en las opciones del menú contextual
      * @param item
      * @return
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Dependency dependency = (Dependency) getListView().getItemAtPosition(adapterContextMenuInfo.position);
-
         switch (item.getItemId()) {
             case R.id.fragment_listdependency_delete:
+                // Se recupera el objeto
+                AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                Dependency dependency = (Dependency) getListView().getItemAtPosition(adapterContextMenuInfo.position);
+
+                // Cuadro de diálogo de confirmación con patrón Builder
                 Bundle bundle = new Bundle();
-                bundle.putString(CommonDialog.MESSAGE, "Desea eliminar la dependencia");
+                bundle.putParcelable(Dependency.TAG, dependency);
                 bundle.putString(CommonDialog.TITLE, "Eliminar dependencia");
-                Dialog dialog = CommonDialog.showConfirmDialog(bundle, getActivity());
+                bundle.putInt(CommonDialog.TYPE, CommonDialog.DELETE_DIALOG);
+                bundle.putString(CommonDialog.MESSAGE, "¿Desea eliminar la dependencia?");
+                Dialog dialog = CommonDialog.showConfirmDialog(bundle, getActivity(), (CommonDialog.CommonDialogListener) presenter);
                 dialog.show();
-                break;
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
-        return super.onContextItemSelected(item);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.adapter = new DependencyAdapter(getActivity());
-        setRetainInstance(true);
+        //setRetainInstance(true);
     }
 
     @Override
@@ -168,6 +172,15 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
         presenter = (ListDependencyContract.Presenter) savedInstanceState.getSerializable(ListDependencyPresenter.TAG);
     }
 
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    }
+    @Override
+    public void showDeletedMessage() {
+        showMessage(getResources().getString(R.string.dependency_deleted));
+    }
+
     /**
      * Se llama cuando se elimina la unión Activity-Fragmnent cuando la Activity se elimine
      */
@@ -182,7 +195,7 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
     @Override
     public void onDestroy() {
         super.onDestroy();
-        presenter = null;
+        presenter.onDestroy();
         adapter = null;
     }
 }

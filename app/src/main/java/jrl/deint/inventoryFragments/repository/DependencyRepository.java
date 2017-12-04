@@ -74,11 +74,16 @@ public class DependencyRepository {
     }
 
     public void editDependency(Dependency dependency, String description) {
+        /*
         int index = dependencies.indexOf(dependency);
         dependency.setDescription(description);
         dependencies.set(index, dependency);
+        */
+        for (Dependency tempDependency : dependencies)
+            if(tempDependency.getName().equals(dependency.getName()))
+                dependency.setDescription(description);
     }
-
+/*
     public boolean exists(String name, String shortname) {
         boolean found = false;
         for (int i = 0; i < dependencies.size() && !found; i++) {
@@ -88,6 +93,10 @@ public class DependencyRepository {
             }
         }
         return found;
+    }
+*/
+    public boolean exists(Dependency dependency) {
+        return dependencies.contains(dependency);
     }
 
     /**
@@ -114,8 +123,10 @@ public class DependencyRepository {
         Dependency dependency;
         while (iterator.hasNext()) {
             dependency = iterator.next();
-            if(dependency.get_ID() == d.get_ID())
+            if(dependency.get_ID() == d.get_ID()) {
                 iterator.remove();
+                break;
+            }
         }
     }
 }

@@ -17,6 +17,32 @@ public class Dependency implements Comparable, Parcelable {
     private String description;
     public static final String TAG = "dependency";
 
+    // Forma alternativa de declarar los Comparator
+    public static final Comparator<Dependency> COMPARATOR_ID = new Comparator<Dependency>() {
+        @Override
+        public int compare(Dependency dependency, Dependency dependency2) {
+            return dependency.get_ID() > dependency2.get_ID() ? 1: -1;
+        }
+    };
+    public static final Comparator<Dependency> COMPARATOR_ID_DESC = new Comparator<Dependency>() {
+        @Override
+        public int compare(Dependency dependency, Dependency dependency2) {
+            return dependency.get_ID() < dependency2.get_ID() ? 1: -1;
+        }
+    };
+    public static final Comparator<Dependency> COMPARATOR_NAME = new Comparator<Dependency>() {
+        @Override
+        public int compare(Dependency dependency, Dependency dependency2) {
+            return dependency.getName().compareToIgnoreCase(dependency2.getName());
+        }
+    };
+    public static final Comparator<Dependency> COMPARATOR_NAME_DESC = new Comparator<Dependency>() {
+        @Override
+        public int compare(Dependency dependency, Dependency dependency2) {
+            return -1 * dependency.getName().compareToIgnoreCase(dependency2.getName());
+        }
+    };
+
     public Dependency(int _ID, String name, String shortname, String description) {
         this._ID = _ID;
         this.name = name;
@@ -81,6 +107,19 @@ public class Dependency implements Comparable, Parcelable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        Dependency dependency = (Dependency) obj;
+        boolean result = true;
+
+        if (!name.equals(dependency.getName()))
+            result = false;
+        else if (!shortname.equals(dependency.getShortname()))
+            result = false;
+
+        return result;
+    }
+
+    @Override
     public int compareTo(@NonNull Object o) {
         return name.compareTo(((Dependency)o).getName());
     }
@@ -105,4 +144,22 @@ public class Dependency implements Comparable, Parcelable {
             return d1.getShortname().compareTo(d2.getShortname());
         }
     }
+
+    public static class DependencyOrderByName implements Comparator<Dependency> {
+
+        @Override
+        public int compare(Dependency o1, Dependency o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
+
+    public static class DependencyOrderById implements Comparator<Dependency> {
+
+        @Override
+        public int compare(Dependency o1, Dependency o2) {
+            //Devuelve positivo si el objeto es mayor que el argumento
+            return o1.get_ID() - o2.get_ID() ;
+        }
+    }
+
 }

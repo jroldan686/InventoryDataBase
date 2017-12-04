@@ -42,4 +42,9 @@ public class DetailDependencyFragment extends Fragment implements DetailDependen
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (DetailDependencyContract.Presenter)presenter;
     }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
 }

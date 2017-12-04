@@ -39,8 +39,10 @@ public class ListDependencyPresenter implements ListDependencyContract.Presenter
     }
 
     @Override
-    public void deleteItem(Dependency parcelable) {
-
+    public void deleteItem(Dependency dependency) {
+        interactor.deleteDependency(dependency);
+        loadDependencies();
+        view.showDeletedMessage();
     }
 
     @Override

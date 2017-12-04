@@ -1,5 +1,7 @@
 package jrl.deint.inventoryFragments.ui.dependency.contract;
 
+import java.io.Serializable;
+
 import jrl.deint.inventoryFragments.data.db.model.Dependency;
 import jrl.deint.inventoryFragments.ui.base.BasePresenter;
 import jrl.deint.inventoryFragments.ui.base.BaseView;
@@ -19,8 +21,11 @@ public interface AddEditDependencyContract {
         void showDependencyDuplicate();
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter, Serializable {
         void saveDependency(String name, String shortName, String description);
         void editDependency(Dependency dependency, String description);
+
+        @Override
+        void onDestroy();
     }
 }

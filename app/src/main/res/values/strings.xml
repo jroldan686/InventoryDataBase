@@ -35,4 +35,5 @@
     <string name="listDependencyFragmentContextTitle">"Opciones Lista Dependencia"</string>
     <string name="btnOk">Aceptar</string>
     <string name="btnCancel">Cancelar</string>
+    <string name="dependency_deleted">Dependencia eliminada</string>
 </resources>

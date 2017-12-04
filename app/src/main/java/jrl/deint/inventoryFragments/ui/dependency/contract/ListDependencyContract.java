@@ -15,10 +15,14 @@ public interface ListDependencyContract {
 
     interface View extends BaseView {
         void showDependency(List listDependencyInteractor);
+        void showDeletedMessage();
     }
 
     interface Presenter extends BasePresenter, Serializable {
         void loadDependencies();
         void deleteItem(Dependency parcelable);
+
+        @Override
+        void onDestroy();
     }
 }
