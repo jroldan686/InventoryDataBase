@@ -36,4 +36,13 @@
     <string name="btnOk">Aceptar</string>
     <string name="btnCancel">Cancelar</string>
     <string name="dependency_deleted">Dependencia eliminada</string>
+    <string name="pref_category_account">Ajustes de la cuenta</string>
+    <string name="pref_description_remember">Activa o desactiva el recuérdame</string>
+    <string name="pref_description_remember_off">El recuérdame está desactivado</string>
+    <string name="pref_description_remember_on">El recuérdame está activado</string>
+    <string name="pref_title_remember">Recuérdame</string>
+    <string name="pref_user_default">Usuario</string>
+    <string name="pref_user_title">Usuario</string>
+    <string name="pref_password_default">Contraseña</string>
+    <string name="pref_password_title">Contraseña</string>
 </resources>

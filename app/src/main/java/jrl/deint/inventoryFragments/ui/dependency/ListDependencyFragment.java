@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -144,6 +145,17 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
             @Override
             public void onClick(View view) {
                 callback.addNewDependency(null);
+            }
+        });
+
+        // Activar la multiselección en la lista
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        getListView().setMultiChoiceModeListener(new DependencyMultiChoiceModeListener());
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                getListView().setItemChecked(position, !presenter.getPositionChecked(position));
+                return true;
             }
         });
     }

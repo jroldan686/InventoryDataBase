@@ -124,7 +124,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void showAppPreferences() {
         SharedPreferences sharedPreferences = ((InventoryApplication).getApplicationContext()).getAppPreferencesHelper();
-        appPreferencesHelper.getCurrentUserName("Lolita"));
+        appPreferencesHelper.getCurrentUserName("Lolita");
         String message = "Tu usuario de sesión es " + sharedPreferences.getCurrentUserName();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
