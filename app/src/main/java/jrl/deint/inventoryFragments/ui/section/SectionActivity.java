@@ -1,5 +1,6 @@
 package jrl.deint.inventoryFragments.ui.section;
 
+import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import jrl.deint.inventoryFragments.R;
 import jrl.deint.inventoryFragments.adapter.SectionAdapter;
@@ -16,6 +18,7 @@ public class SectionActivity extends AppCompatActivity {
 
     private RecyclerView rcvSections;
     private SectionAdapter sectionAdapter;
+    private SectionAdapter.OnItemClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,15 @@ public class SectionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        listener = new SectionAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Section section) {
+                Toast.makeText(SectionActivity.this, "SectionItemClick: " + section.getName(), Toast.LENGTH_LONG).show();
+            }
+        };
+
         if(savedInstanceState != null)
-            sectionAdapter = new SectionAdapter(savedInstanceState.<Section>getParcelableArrayList("section"));
+            sectionAdapter = new SectionAdapter(savedInstanceState.<Section>getParcelableArrayList("section"), listener);
         else
             sectionAdapter = new SectionAdapter();
 

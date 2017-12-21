@@ -29,6 +29,11 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
     private ArrayList<Section> sectionsModified;
     //private OnSwitchCheckedChangeListener onSwitchCheckedChangeListener;
     private OnToggleCheckedChangeListener onToggleCheckedChangeListener;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void  OnItemClick(Section section);
+    }
 
     public SectionAdapter() {
         sections = SectionRepository.getInstance().getSections();
@@ -40,9 +45,10 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
      * y se haya salvado el estado dinámico.
      * @param sectionsModified
      */
-    public SectionAdapter(ArrayList<Section> sectionsModified) {
+    public SectionAdapter(ArrayList<Section> sectionsModified, OnItemClickListener listener) {
         sections = SectionRepository.getInstance().getSections();
         this.sectionsModified = sectionsModified;
+        this.listener = listener;
     }
 
     @Override
@@ -65,6 +71,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
         holder.txvName.setText(sections.get(position).getName());
         if(sections.get(position).isDefault())
             holder.txvDefault.setText(R.string.txvDefault);
+        holder.bind(sections.get(position), listener);
     }
 
 
@@ -86,6 +93,15 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionV
             tgbEnabled = (ToggleButton) itemView.findViewById(R.id.tgbEnabled);
             txvName = (TextView) itemView.findViewById(R.id.txvName);
             txvDefault = (TextView) itemView.findViewById(R.id.txvDefault);
+        }
+
+        public void bind (final Section section, final OnItemClickListener onItemClickListener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(section);
+                }
+            });
         }
     }
 

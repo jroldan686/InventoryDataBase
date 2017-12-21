@@ -9,11 +9,21 @@ import jrl.deint.inventoryFragments.utils.AppConstants;
  * Created by usuario on 4/12/17.
  */
 
-public class AppPreferencesHelper implements AccountPreferencesHelper {
+public class AppPreferencesHelper implements AccountPreferencesHelper, GeneralPreferencesHelper {
+
+    /**
+     * 1) Se definen todas las KEY posibles del fichero de preferencias
+     */
+
+    public interface AppPreferenceListener {
+        public void onSharedPreferenceChanged();
+    }
 
     // 2. Objeto para editar las preferencias
     private final SharedPreferences preferences;
     private static AppPreferencesHelper instance;
+    private SharedPreferences.OnSharedPreferenceChangeListener listener;
+    private String TAG = "AppPreferencesHelper";
 
     private AppPreferencesHelper() {
         // Si es el fichero por defecto de las preferencias
