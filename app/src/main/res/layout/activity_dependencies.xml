@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="jrl.deint.inventoryFragments.ui.dependency.DependenciesActivity">
+    tools:context="jrl.deint.inventoryDataBase.ui.dependency.DependenciesActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

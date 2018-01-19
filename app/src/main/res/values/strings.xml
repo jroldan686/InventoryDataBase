@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">InventoryFragments</string>
+    <string name="app_name" translatable="false">InventoryDataBase</string>
     <string name="txvSignIn">Acceder</string>
     <string name="txvUser">Usuario:</string>
     <string name="txvPassword">Contraseña:</string>

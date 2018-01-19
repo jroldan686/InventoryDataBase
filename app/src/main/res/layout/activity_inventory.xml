@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="jrl.deint.inventoryFragments.ui.inventory.InventoryActivity"
+    tools:context="jrl.deint.inventoryDataBase.ui.inventory.InventoryActivity"
     android:stretchColumns="1">
 
     <!-- stretchColumns permite que las TableRow recojan el espacio total disponible -->
