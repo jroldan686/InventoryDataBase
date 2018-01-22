@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import jrl.deint.inventoryDataBase.data.db.InventoryContract;
 import jrl.deint.inventoryDataBase.ui.inventory.InventoryApplication;
 
@@ -13,8 +15,9 @@ import jrl.deint.inventoryDataBase.ui.inventory.InventoryApplication;
 
 public class InventoryOpenHelper extends SQLiteOpenHelper {
 
-    private static InventoryOpenHelper singleton;
+    private volatile static InventoryOpenHelper singleton;
     private SQLiteDatabase sqLiteDatabase;
+    private AtomicInteger openCounter = new AtomicInteger();
 
     public InventoryOpenHelper() {
         // Se le pasa el CONTEXTO de la APLICACIÓN
@@ -23,7 +26,7 @@ public class InventoryOpenHelper extends SQLiteOpenHelper {
                 null, InventoryContract.DATABASE_VERSION);
     }
 
-    public static InventoryOpenHelper getInstance() {
+    public synchronized static InventoryOpenHelper getInstance() {
         if(singleton == null)
             singleton = new InventoryOpenHelper();
         return singleton;
@@ -62,6 +65,20 @@ public class InventoryOpenHelper extends SQLiteOpenHelper {
                 //db.execSQL("PRAGMA foreign_keys=ON");
                 // Android Studio 3.0
                 db.execSQL("PRAGMA foreign_keys=1");        // El 1 equivale a ON
+        }
+    }
+
+    public synchronized SQLiteDatabase openDatabase() {
+        if(openCounter.incrementAndGet() == 1) {
+            sqLiteDatabase = getWritableDatabase();
+        }
+        return sqLiteDatabase;
+    }
+
+    public synchronized void closeDatabase() {
+        if(openCounter.decrementAndGet() == 0) {
+            // Cierro la base de datos
+            sqLiteDatabase.close();
         }
     }
 }

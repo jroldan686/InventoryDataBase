@@ -1,9 +1,12 @@
 package jrl.deint.inventoryDataBase.repository;
 
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import jrl.deint.inventoryDataBase.data.db.dao.DependencyDao;
 import jrl.deint.inventoryDataBase.data.db.model.Dependency;
 
 /**
@@ -27,10 +30,12 @@ public class DependencyRepository {
      */
     private DependencyRepository() {
         this.dependencies = new ArrayList<>();
-        initialize();
+        //initialize();
+        this.DependencyDao = new DependencyDao();
     }
 
     /* MÉTODOS */
+    /*
     public void initialize() {
         addDependency(new Dependency(1, "1º Ciclo Formativo Grado Superior",
                 "1CFGS", "1CFGS Desarrollo Aplicaciones Multiplataforma"));
@@ -41,6 +46,7 @@ public class DependencyRepository {
         addDependency(new Dependency(4, "2º Ciclo Formativo Grado Medio",
                 "2CFGM", "2CFGM Sistemas Microinformáticos y Redes"));
     }
+    */
 
     /* Patrón Singletón */
     public static DependencyRepository getInstance() {
@@ -54,8 +60,15 @@ public class DependencyRepository {
      * @param dependency
      */
     public void addDependency(Dependency dependency) {
+        /*
         dependency.set_ID(dependencies.size());
         dependencies.add(dependency);
+        */
+        DependencyDao.addDependency(dependency);
+    }
+
+    public void addDependency(Dependency dependency) {
+
     }
 
     public ArrayList<Dependency> getDependencies() {
@@ -63,9 +76,21 @@ public class DependencyRepository {
          * El ArrayList se ordena según el/los criterio/s del método compareTo
          * de la interfaz Comparable
          */
+        /*
         Collections.sort(dependencies);
         // Si se desea que sort() use Comparator, se pasa como segundo parámetro
         Collections.sort(dependencies, new Dependency.DependencyOrderByShortName());
+        return dependencies;
+        */
+
+        Cursor cursor = getDependenciesCursor();
+        if(cursor.moveToFirst()) {
+            do {
+                Dependency dependency = new Dependency((cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
+                dependencies.add(dependency);
+            } while(cursor.moveToNext());
+        }
+
         return dependencies;
     }
 
@@ -128,5 +153,9 @@ public class DependencyRepository {
                 break;
             }
         }
+    }
+
+    public Cursor getDependencyDao() {
+        return null;
     }
 }
