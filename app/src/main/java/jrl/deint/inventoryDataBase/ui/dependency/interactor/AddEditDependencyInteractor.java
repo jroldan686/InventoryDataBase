@@ -21,4 +21,6 @@ public interface AddEditDependencyInteractor {
     void addDependency(String name, String shortname, String description);
 
     void editDependency(Dependency dependency, String description, OnAddEditFinishedListener listener);
+
+    void updateDependency(Dependency dependency);
 }

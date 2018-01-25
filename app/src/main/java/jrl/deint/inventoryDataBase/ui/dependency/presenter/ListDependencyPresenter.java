@@ -25,11 +25,13 @@ public class ListDependencyPresenter implements ListDependencyContract.Presenter
 
     @Override
     public void loadDependencies() {
+        view.showProgressDialog();
         interactor.loadDependencies();
     }
 
     @Override
     public void onSuccess(List<Dependency> dependencies) {
+        view.dismissProgressDialog();
         view.showDependency(dependencies);
     }
 

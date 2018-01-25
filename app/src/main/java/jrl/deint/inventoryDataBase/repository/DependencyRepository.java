@@ -3,7 +3,6 @@ package jrl.deint.inventoryDataBase.repository;
 import android.database.Cursor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 import jrl.deint.inventoryDataBase.data.db.dao.DependencyDao;
@@ -157,5 +156,21 @@ public class DependencyRepository {
 
     public Cursor getDependencyDao() {
         return null;
+    }
+
+    public void updateDependency(Dependency dependency, DependencyCallback callback) {
+        long id = dependencyDao.update(dependency);
+        if(id == 0)
+            callback.onError(error);
+        else
+            callback.onSuccess();
+    }
+
+    public void deleteDependency(Dependency dependency) {
+        int count = dependencyDao.delete(dependency);
+        if(count == 0)
+            callback.onError(error);
+        else
+            callback.onSuccess();
     }
 }

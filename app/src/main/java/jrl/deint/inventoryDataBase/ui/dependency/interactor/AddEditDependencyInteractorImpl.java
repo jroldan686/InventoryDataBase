@@ -38,4 +38,18 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
         } else
             listener.onDescriptionEmptyError();
     }
+
+    public void updateDependency(String name, String shortname, String description, String imageName) {
+        Dependency dependency = new Dependency(name, shortname, description, imageName);
+        DependencyRepository.getInstance().updateDependency(dependency, this);
+        listener.onSuccess();
+    }
+
+    public void onSuccess() {
+        listener.onSuccess();
+    }
+
+    public void onError(Error error) {
+        listener.onDataBaseError(error);
+    }
 }

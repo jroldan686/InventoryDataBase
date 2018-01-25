@@ -104,6 +104,14 @@ public class Dependency implements Comparable, Parcelable {
         this.description = description;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     @Override
     public String toString() {
         return getShortname();
