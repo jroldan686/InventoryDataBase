@@ -39,6 +39,9 @@ public class ListDependencyFragment extends ListFragment implements BaseView, Li
     private DependencyAdapter adapter;
     FloatingActionButton fab;
 
+    /**
+     * Interfaz que se utiliza para comunicar a DependenciesActivity que se va añadir una nueva dependencia (incluida en el bundle)
+     */
     interface ListDependencyListener {
         void addNewDependency(Bundle bundle);
     }

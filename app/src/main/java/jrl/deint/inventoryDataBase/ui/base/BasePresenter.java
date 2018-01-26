@@ -6,6 +6,6 @@ package jrl.deint.inventoryDataBase.ui.base;
 
 public interface BasePresenter {
 
-    void validatedependency();
+    //void validatedependency();
     void onDestroy();
 }
