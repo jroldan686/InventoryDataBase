@@ -68,4 +68,18 @@ public final class InventoryContract {
                 BaseColumns._ID
         );
     }
+
+    public static class ProductInnerEntry implements BaseColumns
+    {
+        public static final String TABLE_NAME = "product";
+        public static final String COLUMN_SERIAL = "serial";
+        public static final String COLUMN_MODELCODE = "modelcode";
+        public static final String COLUMN_SHORTNAME = "shortname";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CATEGORYID = "categoryName";
+        //public static final String COLUMN_SUBCATEGORYID = "subcategoryId";
+        public static final String COLUMN_PRODUCTCLASSID = "productclassId";
+        public static final String COLUMN_PRODUCTCLASSDESCRIPTION = "productclassDescription";
+
+    }
 }
