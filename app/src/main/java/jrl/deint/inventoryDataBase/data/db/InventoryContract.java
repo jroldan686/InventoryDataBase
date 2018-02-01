@@ -80,6 +80,16 @@ public final class InventoryContract {
         //public static final String COLUMN_SUBCATEGORYID = "subcategoryId";
         public static final String COLUMN_PRODUCTCLASSID = "productclassId";
         public static final String COLUMN_PRODUCTCLASSDESCRIPTION = "productclassDescription";
-
+        public static final String COLUMN_SECTORID = "sectorId";
+        //public static final String COLUMN_STATISID = "statusId";
+        public static final String COLUMN_QUANTITY = "quantity";
+        public static final String  COLUMN_VALUE = "value";
+        public static final String  COLUMN_VENDOR = "vendor";
+        public static final String COLUMN_BITMAP = "bitmap";
+        public static final String COLUMN_IMAGENAME = "imageName";
+        public static final String COLUMN_URL = "url";
+        public static final String COLUMN_DATEPURCHASE = "datePurchase";
+        public static final String COLUMN_NOTES = "notes";
+        public static final String[] ALL_COLUMN = new String[]{BaseColumns._ID, COLUMN_SERIAL, COLUMN_MODELCODE, COLUMN_SHORTNAME, };
     }
 }
