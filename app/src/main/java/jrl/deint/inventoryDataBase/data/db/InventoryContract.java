@@ -42,7 +42,9 @@ public final class InventoryContract {
         );
 
         public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS " +
-                "%s", TABLE_NAME);
+                "%s", TABLE_NAME
+        );
+
         public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s'),", TABLE_NAME,
                 COLUMN_NAME,
                 COLUMN_SHORTNAME,
@@ -52,7 +54,18 @@ public final class InventoryContract {
                 "2CFGS",
                 "Aula de los resopladores de 2CFGS",
                 "No tengo imagen") +
-                String.format("('%s', '%s', '%s', '%s'),","Aula de 1CFGS", "1CFGS", "Aula de los pardillos de 1CFGS", "No tengo imagen");
+                String.format("('%s', '%s', '%s', '%s'),","Aula de 1CFGS", "1CFGS", "Aula de los pardillos de 1CFGS", "No tengo imagen"
+        );
+
+        public static final String WHERE_NAME_AND_SHORTNAME = String.format(
+                "%s = ? AND %s = ?",
+                COLUMN_NAME,
+                COLUMN_SHORTNAME
+        );
+
+        public static final String WHERE_ID = String.format(
+                "%s = ?",
+                BaseColumns._ID
         );
     }
 }

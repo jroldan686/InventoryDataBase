@@ -2,7 +2,9 @@ package jrl.deint.inventoryDataBase.data.db.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.Observable;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
@@ -22,7 +24,7 @@ public class DependencyDao {
      * Método que devuelve un cursor con todas las dependencias de la base de datos
      * @return Cursor
      */
-    public Observable<ArrayList<Dependency>> loadAll() {
+    public ArrayList<Dependency> loadAll() {
         ArrayList<Dependency> dependencies = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
@@ -34,29 +36,35 @@ public class DependencyDao {
                             null,
                              InventoryContract.DependencyEntry.DEFAULT_SORT,
                             null);
+        if(cursor.moveToFirst()) {
+            do {
+                dependencies.add(new Dependency(
+                        cursor.getInt(0),
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4))
+                );
+            } while (cursor.moveToNext());
+        }
         dependencies.clear();
+        cursor.close();
         InventoryOpenHelper.getInstance().closeDatabase();
-        return cursor;
+        return dependencies;
     }
 
-    public long save(Dependency dependency) {
-        InventoryOpenHelper.getInstance().openDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(InventoryContract.DependencyEntry.COLUMN_NAME, dependency.getName());
-        contentValues.put(InventoryContract.DependencyEntry.COLUMN_SHORTNAME, dependency.getShortname());
-        contentValues.put(InventoryContract.DependencyEntry.COLUMN_DESCRIPTION, dependency.getDescription());
-        contentValues.put(InventoryContract.DependencyEntry.COLUMN_IMAGENAME, dependency.getImageName());
-
+    public long add(Dependency dependency) {
+        SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
         // Null representa las columnas que podrían ser nulas
-        long id = sqLiteDatabase.insert(InventoryContract.DependencyEntry.TABLE_NAME, null, contentValues);
-
+        long id = sqLiteDatabase.insert(InventoryContract.DependencyEntry.TABLE_NAME, null, createContent(dependency));
         InventoryOpenHelper.getInstance().closeDatabase();
-
         return id;
     }
 
     public boolean exists(Dependency dependency) {
-
+        SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
+        return DatabaseUtils.queryNumEntries(sqLiteDatabase,
+                InventoryContract.DependencyEntry.TABLE_NAME,
+                InventoryContract.DependencyEntry.WHERE_NAME_AND_SHORTNAME,
+                new String[]{dependency.getName(), dependency.getShortname()}) > 0;
     }
 
     public void update(Dependency dependency) {
@@ -69,11 +77,29 @@ public class DependencyDao {
         InventoryOpenHelper.getInstance().closeDatabase();
     }
 
-    public void delete(Dependency dependency) {
-
+    public int delete(Dependency dependency) {
+        int result;
+        try {
+            SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
+            String[] whereArgs = new String[]{dependency.get_ID() + ""};
+            result = sqLiteDatabase.delete(
+                    InventoryContract.DependencyEntry.TABLE_NAME,
+                    InventoryContract.DependencyEntry.WHERE_ID,
+                    whereArgs
+            );
+            return result;
+        } catch (SQLException e) {
+            return 0;
+        }
     }
 
     public ContentValues createContent(Dependency dependency) {
-
+        //ContentValues funciona como un mapa
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(InventoryContract.DependencyEntry.COLUMN_NAME, dependency.getName());
+        contentValues.put(InventoryContract.DependencyEntry.COLUMN_SHORTNAME, dependency.getShortname());
+        contentValues.put(InventoryContract.DependencyEntry.COLUMN_DESCRIPTION, dependency.getDescription());
+        contentValues.put(InventoryContract.DependencyEntry.COLUMN_IMAGENAME, dependency.getImageName());
+        return contentValues;
     }
 }
